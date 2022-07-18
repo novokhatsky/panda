@@ -63,11 +63,16 @@ window.onload = function () {
     }
 
     function square() {
-        tetris[1][1] = 1 + Math.floor(Math.random() * MAX_COLOR);
+        tetris[0][0] = 1 + Math.floor(Math.random() * MAX_COLOR);
+    }
+
+    function down() {
+        draw();
     }
 
     let tetris = init();
     draw();
     square();
-    draw();
+
+    document.querySelector('.start').onclick = down;
 }
