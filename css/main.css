@@ -13,6 +13,12 @@ header h1 {
     padding: 20px 0;
 }
 
+.container {
+    width: 80%;
+    margin: 20px auto;
+    max-width: 960px;
+}
+
 main {
     display: flex;
     align-content: stretch;
@@ -23,8 +29,71 @@ main {
 }
 
 .tetris-wrap {
-    width: 300px;
-    height: 500px;
+    width: 270px;
+    height: 450px;
     margin: 0 auto;
+    border: 1px solid green;
+    background-color: grey;
+}
+
+.text-field {
+    margin: 20px 0;
+    padding: 20px;
+}
+
+.start {
+    border: 1px solid #3d6e1c;
+    box-shadow: 1px 1px 1px #c0c0c0;
+    background: #fff;
+    display: block;
+    width: 50%;
+    padding 20px 30px;
+    margin: 0 auto;
+}
+
+.rule {
+    margin-top: 30px;
+}
+
+.score-field {
+    font-size: 40px;
+    padding: 30px 0;
+}
+
+#tetris-field {
+    width: 270px;
+    height: 450px;
+}
+
+
+.brick {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    float: left;
+}
+
+.white {
+    background: #fff;
+}
+
+.orange {
+    background: orange;
+}
+
+.blue {
+    background: #48a9c5;
+}
+
+.red {
+    background: #fe5000;
+}
+
+.green {
+    background: #49a94a;
+}
+
+.purple {
+    background: #8e43e7;
 }
 
