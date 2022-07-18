@@ -30,10 +30,6 @@ window.onload = function () {
             for (let j = 0; j < WIDTH; j++) {
 
                 switch (tetris[i][j]) {
-                
-                    case 0:
-                        out += '<div class="brick white"></div>';
-                        break;
 
                     case 1:
                         out += '<div class="brick orange"></div>';
@@ -54,6 +50,10 @@ window.onload = function () {
                     case 5:
                         out += '<div class="brick purple"></div>';
                         break;
+
+                    default:
+                        out += '<div class="brick white"></div>';
+                        break;
                 }
             }
         }
@@ -68,6 +68,22 @@ window.onload = function () {
 
     function down() {
         draw();
+
+        let newDrop = true;
+
+        for (let i = HEIGHT - 2; i >= 0; i--) {
+            for (let j = 0; j < WIDTH; j++) {
+                if (tetris[i][j] != 0 && tetris[i + 1][j] == 0) {
+                    tetris[i + 1][j] = tetris[i][j];
+                    tetris[i][j] = 0;
+                    newDrop = false;
+                }
+            }
+        }
+
+        if (newDrop) {
+            square();
+        }
     }
 
     let tetris = init();
