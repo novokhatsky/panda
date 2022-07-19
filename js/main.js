@@ -5,7 +5,6 @@ window.onload = function () {
 
     let tetrisField = document.querySelector('#tetris-field');
     let scoreField = document.querySelector('.score-field');
-    let color = [1, 2, 3, 4, 5];
     let timer;
     let score = 0;
 
@@ -86,7 +85,14 @@ window.onload = function () {
             }
 
             if (newDrop) {
+
                 // проверка заполненных линий
+                collection = checkFillH();
+
+                if (collection.length != 0) {
+                    clearEqual(collection);
+                    scrollDown();
+                }
 
                 figure = square();
             }
@@ -115,15 +121,69 @@ window.onload = function () {
     }
 
     function scrollDown() {
-
         for (let i = HEIGHT - 2; i >= 0; i--) {
             for (let j = 0; j < WIDTH; j++) {
                 if (tetris[i][j] != 0 && tetris[i + 1][j] == 0) {
                     tetris[i + 1][j] = tetris[i][j];
                     tetris[i][j] = 0;
-                    newDrop = false;
                 }
             }
+        }
+    }
+
+    function checkFillH() {
+        for (let i = HEIGHT - 1; i >= 0; i--) {
+            let prev = null;
+            let collection = [];
+
+            for (let j = 0; j < WIDTH; j++) {
+
+                if (tetris[i][j] == 0) {
+
+                    if (collection.length > 2) {
+                        // коллекция собрана
+                        return collection;
+                    }
+
+                    prev = null;
+                    collection = [];
+
+                    continue
+                }
+
+                if (!prev && tetris[i][j] != 0) {
+
+                    prev = tetris[i][j];
+                    collection.push([i, j]);
+
+                    continue;
+                }
+
+                if (prev == tetris[i][j]) {
+                    collection.push([i, j]);
+
+                    continue;
+                } else {
+                    if (collection.length > 2) {
+                        // коллекция собрана
+                        return collection;
+                    }
+
+                    prev = tetris[i][j];
+                    collection = [];
+                    collection.push([i, j]);
+
+                    continue
+                }
+            }
+        }
+
+        return [];
+    }
+
+    function clearEqual(collection) {
+        for (let i = 0; i < collection.length; i++) {
+            tetris[collection[i][0]][collection[i][1]] = 0;
         }
     }
 
